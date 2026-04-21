@@ -1,0 +1,16 @@
+fastapi
+uvicorn
+python-dotenv
+langchain
+langchain-community
+langchain-openai
+langchain-huggingface
+faiss-cpu
+pandas
+beautifulsoup4
+requests
+tavily-python
+openai
+SQLAlchemy
+groq
+sentence-transformers
