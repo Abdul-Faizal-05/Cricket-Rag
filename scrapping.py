@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import re
 
-url = "https://en.wikipedia.org/wiki/2024_Indian_Premier_League"
+url = "https://en.wikipedia.org/wiki/2025_Indian_Premier_League"
 headers = {"User-Agent": "Mozilla/5.0"}
 
 response = requests.get(url, headers=headers)
@@ -67,7 +67,7 @@ clean_text = "\n\n".join(lines)
 clean_text = re.sub(r"\n{3,}", "\n\n", clean_text)
 
 # ── Save ──────────────────────────────────────────────────────────────────────
-output_path = "ipl_2023.txt"
+output_path = "ipl_2025.txt"
 with open(output_path, "w", encoding="utf-8") as f:
     f.write(clean_text)
 
