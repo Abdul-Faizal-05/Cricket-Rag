@@ -77,6 +77,9 @@ def ask_agent(question: str, retries: int = 2) -> None:
 if __name__ == "__main__":
     questions = [
         "Who won the first match of the 2026?",
+        "Who scored the most runs in IPL 2024?",
+        "Who was the best performer of IPL 2025 season?",
+        "Who was more consistent — Rohit Sharma or KL Rahul in IPL 2024?",
     ]
 
     for q in questions:
