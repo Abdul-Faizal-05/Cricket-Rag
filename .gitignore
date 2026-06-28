@@ -1,4 +1,57 @@
-venv
-./venv
+# ── Python ──────────────────────────────────────
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+*.egg
+.eggs/
+
+# ── Virtual Environment ──────────────────────────
+venv/
+.venv/
+env/
+ENV/
+
+# ── Environment Variables ────────────────────────
 .env
-./env
+.env.*
+!.env.example
+
+# ── Database files ───────────────────────────────
+*.db
+*.sqlite3
+
+# ── IDE & Editor ─────────────────────────────────
+.vscode/
+.idea/
+*.code-workspace
+
+# ── OS Files ─────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Logs & Temp ──────────────────────────────────
+*.log
+*.tmp
+*.cache
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ── Jupyter (if used) ────────────────────────────
+.ipynb_checkpoints/
+
+# ── RAG / Vector Store artifacts ─────────────────
+chroma_db/
+faiss_index/
+*.index
+embeddings/
+
+# ── Data & Scripts output ────────────────────────
+data/db/
+*.csv
