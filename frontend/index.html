@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPL Agent Q&A Protocol</title>
+    <meta name="description" content="An agentic Q&A system for IPL Cricket Stats and Summaries in a Neo-Brutalist console layout.">
+    <!-- Google Fonts: Space Grotesk for Headings/Monospace, Outfit for Body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons for clean symbols -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <!-- HEADER BAR -->
+    <header class="brutalist-header">
+        <div class="header-left">
+            <div class="status-indicator">
+                <span class="status-dot green pulse" id="connection-dot"></span>
+                <i data-lucide="terminal" class="icon-black"></i>
+            </div>
+            <div class="logo-box">
+                <span class="logo-main">IPL AGENT</span>
+                <span class="logo-divider">//</span>
+                <span class="logo-sub">Q&A PROTOCOL</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <button class="brutalist-btn btn-blue" id="btn-export">
+                <i data-lucide="download"></i> INTEL.EXPORT()
+            </button>
+            <button class="brutalist-btn btn-green" id="btn-refresh">
+                <i data-lucide="rotate-cw"></i> FORCE REFRESH
+            </button>
+            <button class="brutalist-btn btn-pink" id="btn-quit">
+                <i data-lucide="log-out"></i> QUIT SYSTEM
+            </button>
+        </div>
+    </header>
+
+    <!-- SUB-HEADER PROTOCOL BAR -->
+    <div class="protocol-bar">
+        <div class="badge-verified">
+            <span class="badge-text">IDENTITY VERIFIED</span>
+        </div>
+        <div class="protocol-status">
+            <span class="label">Status:</span>
+            <span class="value" id="protocol-status-text">Dynamic Edge Agent Routing Active</span>
+            <span class="status-dot green"></span>
+        </div>
+    </div>
+
+    <!-- MAIN GRID LAYOUT -->
+    <main class="dashboard-grid">
+        <!-- LEFT COLUMN: SIDEBAR CONTROLS -->
+        <aside class="sidebar">
+            <!-- CORE RANK CARD (YELLOW) -->
+            <section class="brutalist-card card-yellow" id="rank-card">
+                <div class="card-tag">CORE RANK</div>
+                <div class="card-body">
+                    <h2 class="yellow-card-title">CRICKET INTEL</h2>
+                    <p class="yellow-card-subtitle">ANALYST ENGINE v1.2</p>
+                    
+                    <div class="stat-progress-group">
+                        <div class="stat-label">
+                            <span>SQL DB INTEGRITY</span>
+                            <span id="sql-val">99%</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" style="width: 99%"></div>
+                        </div>
+                    </div>
+
+                    <div class="stat-progress-group">
+                        <div class="stat-label">
+                            <span>VECTOR DB CAPACITY</span>
+                            <span id="vector-val">100%</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" style="width: 100%"></div>
+                        </div>
+                    </div>
+
+                    <div class="stat-progress-group">
+                        <div class="stat-label">
+                            <span>WEB ROUTER API</span>
+                            <span id="web-val">ACTIVE</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar green-bar" style="width: 100%"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- QUICK SUGGESTIONS -->
+            <section class="brutalist-card card-white">
+                <div class="card-header-black">
+                    <i data-lucide="zap"></i> QUICK PROTOCOLS
+                </div>
+                <div class="card-body padding-sm">
+                    <p class="card-desc">Execute pre-set analytical prompts directly into the routing agent:</p>
+                    <div class="query-suggestions">
+                        <button class="suggestion-btn" data-query="Who was the top run scorer in IPL 2024?">
+                            <span>Top Batter 2024 (SQL)</span>
+                            <i data-lucide="arrow-right"></i>
+                        </button>
+                        <button class="suggestion-btn" data-query="What was KKR's win percentage in the 2024 season?">
+                            <span>KKR Win % (SQL + Math)</span>
+                            <i data-lucide="arrow-right"></i>
+                        </button>
+                        <button class="suggestion-btn" data-query="Give me a summary of the IPL 2025 tournament and who won the awards.">
+                            <span>IPL 2025 Summaries (FAISS)</span>
+                            <i data-lucide="arrow-right"></i>
+                        </button>
+                        <button class="suggestion-btn" data-query="Who are the current key players for the IPL 2025 season and any recent player news?">
+                            <span>Recent IPL News (Web Search)</span>
+                            <i data-lucide="arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </aside>
+
+        <!-- RIGHT COLUMN: MAIN WORKSPACE -->
+        <div class="main-workspace">
+            <!-- INPUT CONSOLE -->
+            <section class="brutalist-card card-white">
+                <div class="card-header-black">
+                    <i data-lucide="terminal"></i> AGENT QUERY INPUT
+                </div>
+                <div class="card-body">
+                    <div class="input-container">
+                        <textarea id="query-input" placeholder="ASK THE IPL ANALYST AGENT (e.g. 'Who hit the most sixes in 2024?' or 'Who was player of the match in the final match of 2024?')..." rows="3"></textarea>
+                        <button class="brutalist-btn btn-sky submit-btn" id="btn-submit">
+                            <span>SUBMIT QUERY</span> <i data-lucide="send"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- RUNNING / AGENT TRACE LOOPS -->
+            <section class="brutalist-card card-white hidden" id="trace-section">
+                <div class="card-header-black flex-between">
+                    <span><i data-lucide="cpu" class="spin"></i> AGENTIC THINKING PATHWAY</span>
+                    <span class="badge-black" id="steps-badge">0 / 8 STEPS</span>
+                </div>
+                <div class="card-body bg-terminal">
+                    <!-- LOADING STATE -->
+                    <div id="trace-loading" class="trace-loading-container">
+                        <div class="spinner-box">
+                            <span class="routing-pulse"></span>
+                            <span class="routing-text">ROUTING AGENT ASSESSING INTEL...</span>
+                        </div>
+                        <p class="loading-subtext">The agent is evaluating the question against SQLite tables, FAISS vectors, and Tavily Web Search. This may run up to 8 loops and take a few seconds.</p>
+                    </div>
+                    <!-- STEPS CONTAINER -->
+                    <div id="trace-steps-container" class="steps-flow"></div>
+                </div>
+            </section>
+
+            <!-- FINAL ANSWER DISPLAY (NEURAL ROAST STYLE) -->
+            <section class="brutalist-card card-white hidden" id="answer-section">
+                <div class="card-header-black flex-between">
+                    <span>⚡ NEURAL INSIGHT SYNTHESIS</span>
+                    <span class="live-badge">LIVE</span>
+                </div>
+                <div class="card-body padding-lg text-center-quote">
+                    <span class="quote-mark">“</span>
+                    <blockquote id="final-answer-text" class="quote-text">
+                        Gathering data to formulate response...
+                    </blockquote>
+                    <span class="quote-mark right-align">”</span>
+                    
+                    <div class="answer-footer">
+                        <div class="citations-container" id="citations-pills">
+                            <!-- JS will inject citation pills here -->
+                        </div>
+                        <div class="metadata-stats">
+                            <span class="stat-pill" id="meta-steps">Steps: 0</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="brutalist-footer">
+        <p>© 2026 IPL AGENT CONSOLE // ALL SYSTEM LOGS CLASSIFIED // DATA COVERS 2024-2025 seasons</p>
+    </footer>
+
+    <!-- QUIT OVERLAY -->
+    <div class="quit-overlay hidden" id="quit-overlay">
+        <div class="quit-modal">
+            <div class="quit-modal-header">⚠ SYSTEM SHUTDOWN</div>
+            <div class="quit-modal-body">
+                <p>You are about to terminate the IPL Agent Console session.</p>
+                <p>All unsaved query traces will be cleared from memory.</p>
+                <div class="quit-btn-group">
+                    <button class="brutalist-btn btn-pink" id="btn-confirm-quit">
+                        <i data-lucide="power"></i> CONFIRM QUIT
+                    </button>
+                    <button class="brutalist-btn btn-green" id="btn-cancel-quit">
+                        <i data-lucide="x"></i> CANCEL
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lucide icons replacement runner -->
+    <script>
+        lucide.createIcons();
+    </script>
+    <script src="/app.js"></script>
+</body>
+</html>

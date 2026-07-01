@@ -1,9 +1,15 @@
+import sys
+import os
+
+# Add 'src' directory to Python path to resolve tools and client imports
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "src"))
+
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import HTMLResponse, Response
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import uvicorn
 from dotenv import load_dotenv
-import os
 import json
 from groq import Groq
 from tools import search_docs, query_data, web_search, SCHEMA_DESCRIPTION
@@ -19,6 +25,31 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.get("/", response_class=HTMLResponse)
+async def serve_index():
+    try:
+        with open("frontend/index.html", "r", encoding="utf-8") as f:
+            return HTMLResponse(content=f.read(), status_code=200)
+    except Exception as e:
+        return HTMLResponse(content=f"<h3>Frontend Error: index.html not found</h3><p>{e}</p>", status_code=500)
+
+@app.get("/style.css")
+async def serve_css():
+    try:
+        with open("frontend/style.css", "r", encoding="utf-8") as f:
+            return Response(content=f.read(), media_type="text/css")
+    except Exception as e:
+        return Response(content=f"/* Error loading stylesheet: {e} */", media_type="text/css", status_code=500)
+
+@app.get("/app.js")
+async def serve_js():
+    try:
+        with open("frontend/app.js", "r", encoding="utf-8") as f:
+            return Response(content=f.read(), media_type="application/javascript")
+    except Exception as e:
+        return Response(content=f"console.error('Error loading app.js: {e}');", media_type="application/javascript", status_code=500)
+
 
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
 if not GROQ_API_KEY:

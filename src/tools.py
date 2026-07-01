@@ -9,6 +9,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 # --- Validate required environment variables ---
 TAVILY_API_KEY = os.getenv("TAVILY_API_KEY")
 if not TAVILY_API_KEY:
@@ -81,7 +83,10 @@ def _get_vectorstore() -> FAISS:
     if _vectorstore_cache is not None:
         return _vectorstore_cache
 
-    text_files = ["ipl_2024_summary.txt", "ipl_2025_summary.txt"]
+    text_files = [
+        os.path.join(PROJECT_ROOT, "data", "raw", "ipl_2024_summary.txt"),
+        os.path.join(PROJECT_ROOT, "data", "raw", "ipl_2025_summary.txt")
+    ]
     raw_texts = []
     for tf in text_files:
         if not os.path.exists(tf):
@@ -121,8 +126,8 @@ async def query_data(query: str) -> str:
     Query the structured IPL data table using SQL.
     The input MUST be a valid SQL SELECT query using the schema above.
     """
-    db_path = "ipl_data.db"
-    csv_path = "ipl_2024-2025.csv"
+    db_path = os.path.join(PROJECT_ROOT, "data", "db", "ipl_data.db")
+    csv_path = os.path.join(PROJECT_ROOT, "data", "raw", "ipl_2024-2025.csv")
 
     if not os.path.exists(db_path):
         if not os.path.exists(csv_path):
