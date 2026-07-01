@@ -12,6 +12,12 @@
     --neon-sky: #00B0FF;
     --neon-yellow: #FFD000;
     
+    /* Team color variables (default = IPL brand) */
+    --team-primary: #E52E87;
+    --team-secondary: #00A8E8;
+    --team-accent: #FFD000;
+    --team-bg: #FAF6EE;
+    
     /* Layout Dimensions */
     --border-width: 3px;
     --shadow-offset: 5px;
@@ -183,7 +189,8 @@ h1, h2, h3, h4, h5, h6 {
 .btn-green { background-color: var(--neon-green); color: var(--border-black); }
 .btn-sky { background-color: var(--neon-sky); color: var(--border-black); }
 .btn-yellow { background-color: var(--neon-yellow); color: var(--border-black); }
-.btn-pink { background-color: var(--neon-pink); color: var(--card-white); }
+.btn-pink { background-color: var(--neon-pink); color: var(--border-black); }
+.btn-theme { background-color: var(--team-primary); color: var(--team-text, var(--border-black)); border-color: var(--border-black); }
 
 /* PROTOCOL BAR */
 .protocol-bar {
@@ -691,9 +698,9 @@ textarea#query-input:focus {
     box-shadow: 2px 2px 0px var(--border-black);
 }
 
-.citation-pill.citation-query_data { background-color: var(--neon-green); }
-.citation-pill.citation-search_docs { background-color: var(--neon-yellow); }
-.citation-pill.citation-web_search { background-color: var(--neon-sky); }
+.citation-pill.citation-query_data { background-color: var(--neon-green); color: var(--border-black); }
+.citation-pill.citation-search_docs { background-color: var(--neon-yellow); color: var(--border-black); }
+.citation-pill.citation-web_search { background-color: var(--neon-sky); color: var(--border-black); }
 
 .metadata-stats {
     font-family: var(--font-header);
@@ -720,6 +727,191 @@ textarea#query-input:focus {
     letter-spacing: 0.05em;
     border-top: var(--border-width) solid var(--border-black);
     margin-top: auto;
+}
+
+/* ============================
+   THEME SELECTOR
+   ============================ */
+
+.theme-selector-wrapper {
+    position: relative;
+}
+
+.theme-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: 400px;
+    background: var(--card-white);
+    border: var(--border-width) solid var(--border-black);
+    box-shadow: var(--shadow-offset) var(--shadow-offset) 0px var(--border-black);
+    z-index: 999;
+    padding: 16px;
+}
+
+.theme-dropdown-header {
+    font-family: var(--font-header);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border-black);
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.theme-dropdown-header span {
+    color: var(--neon-pink);
+}
+
+.theme-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.theme-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border: 2px solid var(--border-black);
+    cursor: pointer;
+    background: var(--bg-cream);
+    transition: all 0.15s ease;
+    font-family: var(--font-header);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.theme-option:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 3px 3px 0px var(--border-black);
+}
+
+.theme-option.active-theme {
+    background: var(--team-primary);
+    color: #fff;
+}
+
+.theme-swatches {
+    display: flex;
+    gap: 3px;
+    flex-shrink: 0;
+}
+
+.theme-swatch {
+    width: 16px;
+    height: 16px;
+    border: 1px solid var(--border-black);
+}
+
+/* ============================
+   IPL TEAM THEMES
+   ============================ */
+
+[data-theme="csk"] {
+    --team-primary: #FFD700;
+    --team-secondary: #1B4E9B;
+    --team-accent: #1B4E9B;
+    --team-text: #000000;
+    --neon-pink: #FFD700;
+    --neon-yellow: #1B4E9B;
+    --bg-cream: #FFF8E1;
+}
+
+[data-theme="dc"] {
+    --team-primary: #17489E;
+    --team-secondary: #ED1B24;
+    --team-accent: #ED1B24;
+    --team-text: #FFFFFF;
+    --neon-pink: #ED1B24;
+    --neon-yellow: #17489E;
+    --bg-cream: #EEF2FF;
+}
+
+[data-theme="gt"] {
+    --team-primary: #1B2133;
+    --team-secondary: #B4975A;
+    --team-accent: #B4975A;
+    --team-text: #FFFFFF;
+    --neon-pink: #B4975A;
+    --neon-yellow: #1B2133;
+    --bg-cream: #F0EDE6;
+}
+
+[data-theme="kkr"] {
+    --team-primary: #4A0080;
+    --team-secondary: #D4AF37;
+    --team-accent: #D4AF37;
+    --team-text: #FFFFFF;
+    --neon-pink: #D4AF37;
+    --neon-yellow: #4A0080;
+    --bg-cream: #F5F0FF;
+}
+
+[data-theme="lsg"] {
+    --team-primary: #00B4D8;
+    --team-secondary: #1B2133;
+    --team-accent: #FF6A00;
+    --team-text: #000000;
+    --neon-pink: #FF6A00;
+    --neon-yellow: #00B4D8;
+    --bg-cream: #E8F7FC;
+}
+
+[data-theme="mi"] {
+    --team-primary: #004C93;
+    --team-secondary: #D4A843;
+    --team-accent: #D4A843;
+    --team-text: #FFFFFF;
+    --neon-pink: #D4A843;
+    --neon-yellow: #004C93;
+    --bg-cream: #EDF3FA;
+}
+
+[data-theme="pbks"] {
+    --team-primary: #DD1F2D;
+    --team-secondary: #FFD700;
+    --team-accent: #FFD700;
+    --team-text: #FFFFFF;
+    --neon-pink: #DD1F2D;
+    --neon-yellow: #FFD700;
+    --bg-cream: #FFF0EE;
+}
+
+[data-theme="rr"] {
+    --team-primary: #FF1493;
+    --team-secondary: #004C93;
+    --team-accent: #004C93;
+    --team-text: #FFFFFF;
+    --neon-pink: #FF1493;
+    --neon-yellow: #004C93;
+    --bg-cream: #FFF0F5;
+}
+
+[data-theme="rcb"] {
+    --team-primary: #EC1C24;
+    --team-secondary: #1A1A2E;
+    --team-accent: #1A1A2E;
+    --team-text: #FFFFFF;
+    --neon-pink: #EC1C24;
+    --neon-yellow: #1A1A2E;
+    --bg-cream: #FFF0F0;
+}
+
+[data-theme="srh"] {
+    --team-primary: #FF6A00;
+    --team-secondary: #1C1C1C;
+    --team-accent: #1C1C1C;
+    --team-text: #FFFFFF;
+    --neon-pink: #FF6A00;
+    --neon-yellow: #1C1C1C;
+    --bg-cream: #FFF3E0;
 }
 
 /* Mobile styles for smaller viewports */
@@ -803,4 +995,241 @@ textarea#query-input:focus {
     display: flex;
     gap: 12px;
     margin-top: 20px;
+}
+
+/* ============================
+   IPL SCROLL SECTION
+   ============================ */
+
+.ipl-scroll-section {
+    background-color: var(--bg-cream);
+    border-top: 4px solid var(--border-black);
+    padding: 60px 24px;
+    max-width: 1600px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Section Header */
+.ipl-scroll-header {
+    text-align: center;
+    margin-bottom: 60px;
+    padding-bottom: 40px;
+    border-bottom: 3px solid var(--border-black);
+}
+
+.ipl-scroll-tag {
+    display: inline-block;
+    background-color: var(--border-black);
+    color: var(--neon-yellow);
+    font-family: var(--font-header);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    padding: 4px 12px;
+    margin-bottom: 16px;
+}
+
+.ipl-scroll-heading {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    font-family: var(--font-header);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.highlight-pink {
+    color: var(--neon-pink);
+}
+
+.ipl-scroll-subheading {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: #555;
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Individual rows */
+.ipl-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+    margin-bottom: 80px;
+    padding-bottom: 80px;
+    border-bottom: 2px dashed rgba(0,0,0,0.12);
+}
+
+.ipl-row:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+/* Sticky Image Column */
+.sticky-col {
+    position: sticky;
+    top: 80px;
+    align-self: start;
+}
+
+/* Player Sticker */
+.player-sticker {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 4px solid var(--border-black);
+    box-shadow: 8px 8px 0px var(--border-black);
+    overflow: hidden;
+    background: var(--card-white);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.player-sticker:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 11px 11px 0px var(--border-black);
+}
+
+/* Sticker color accent strip at top */
+.sticker-pink  { border-top: 8px solid var(--neon-pink); }
+.sticker-green { border-top: 8px solid var(--neon-green); }
+.sticker-yellow { border-top: 8px solid var(--neon-yellow); }
+.sticker-sky   { border-top: 8px solid var(--neon-sky); }
+
+/* Player Image with blur edges */
+.player-img {
+    width: 50%;
+    height: 380px;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+    /* Frosted blur vignette edges */
+    mask-image: radial-gradient(ellipse 85% 90% at 50% 40%, black 50%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 85% 90% at 50% 40%, black 50%, transparent 100%);
+    filter: contrast(1.05) saturate(1.1);
+}
+
+.sticker-label {
+    background-color: var(--border-black);
+    color: var(--card-white);
+    font-family: var(--font-header);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 8px 16px;
+    width: 100%;
+    text-align: center;
+    border-top: 3px solid var(--border-black);
+}
+
+/* Content Column */
+.ipl-content-col {
+    padding: 8px 0;
+}
+
+.content-tag {
+    display: inline-block;
+    font-family: var(--font-header);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 3px 10px;
+    border: 2px solid var(--border-black);
+    margin-bottom: 14px;
+    box-shadow: 2px 2px 0px var(--border-black);
+}
+
+.tag-yellow { background-color: var(--neon-yellow); color: var(--border-black); }
+.tag-green  { background-color: var(--neon-green); color: var(--border-black); }
+.tag-blue   { background-color: var(--neon-blue); color: var(--border-black); }
+.tag-pink   { background-color: var(--neon-pink); color: var(--border-black); }
+
+.content-heading {
+    font-family: var(--font-header);
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin-bottom: 18px;
+    border-bottom: 3px solid var(--border-black);
+    padding-bottom: 12px;
+}
+
+.content-para {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.75;
+    color: #333;
+    margin-bottom: 16px;
+}
+
+/* Stat Chips */
+.stat-chips {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 24px;
+}
+
+.stat-chip {
+    font-family: var(--font-header);
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 5px 12px;
+    border: 2px solid var(--border-black);
+    box-shadow: 3px 3px 0px var(--border-black);
+    letter-spacing: 0.04em;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    cursor: default;
+}
+
+.stat-chip:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0px var(--border-black);
+}
+
+.chip-green  { background-color: var(--neon-green); color: var(--border-black); }
+.chip-pink   { background-color: var(--neon-pink); color: var(--border-black); }
+.chip-blue   { background-color: var(--neon-blue); color: var(--border-black); }
+.chip-yellow { background-color: var(--neon-yellow); color: var(--border-black); }
+.chip-purple { background-color: #7c3aed; color: var(--card-white); }
+.chip-sky    { background-color: var(--neon-sky); color: var(--border-black); }
+
+/* Responsive: stack on small screens */
+@media (max-width: 768px) {
+    .ipl-row {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        margin-bottom: 48px;
+        padding-bottom: 48px;
+    }
+
+    /* Always show content first on mobile */
+    .row-img-left .ipl-img-col { order: -1; }
+    .row-img-right .ipl-img-col { order: -1; }
+
+    .sticky-col {
+        position: relative;
+        top: auto;
+    }
+
+    .player-img {
+        height: 260px;
+    }
+}
+
+@media (max-width: 600px) {
+    .theme-dropdown {
+        width: 280px;
+        right: -60px;
+    }
+    .theme-grid {
+        grid-template-columns: 1fr;
+    }
 }

@@ -50,6 +50,19 @@ async def serve_js():
     except Exception as e:
         return Response(content=f"console.error('Error loading app.js: {e}');", media_type="application/javascript", status_code=500)
 
+@app.get("/images/{filename}")
+async def serve_image(filename: str):
+    try:
+        img_path = f"frontend/images/{filename}"
+        with open(img_path, "rb") as f:
+            content = f.read()
+        ext = filename.rsplit(".", 1)[-1].lower()
+        media_types = {"png": "image/png", "jpg": "image/jpeg", "jpeg": "image/jpeg", "gif": "image/gif", "webp": "image/webp"}
+        media_type = media_types.get(ext, "application/octet-stream")
+        return Response(content=content, media_type=media_type)
+    except Exception as e:
+        return Response(content=b"", status_code=404)
+
 
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
 if not GROQ_API_KEY:

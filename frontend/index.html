@@ -28,14 +28,23 @@
             </div>
         </div>
         <div class="header-right">
+            <div class="theme-selector-wrapper">
+                <button class="brutalist-btn btn-theme" id="btn-theme">
+                    <i data-lucide="palette"></i> TEAM THEME
+                </button>
+                <div class="theme-dropdown hidden" id="theme-dropdown">
+                    <div class="theme-dropdown-header">
+                        SELECT TEAM <span>COLOR PROTOCOL</span>
+                    </div>
+                    <div class="theme-grid" id="theme-grid">
+                        <div class="theme-option" data-theme="default">
+                            <span style="font-size:0.65rem">⚙</span> DEFAULT
+                        </div>
+                    </div>
+                </div>
+            </div>
             <button class="brutalist-btn btn-blue" id="btn-export">
                 <i data-lucide="download"></i> INTEL.EXPORT()
-            </button>
-            <button class="brutalist-btn btn-green" id="btn-refresh">
-                <i data-lucide="rotate-cw"></i> FORCE REFRESH
-            </button>
-            <button class="brutalist-btn btn-pink" id="btn-quit">
-                <i data-lucide="log-out"></i> QUIT SYSTEM
             </button>
         </div>
     </header>
@@ -187,29 +196,105 @@
         </div>
     </main>
 
+    <!-- IPL INTEL SCROLL SECTION -->
+    <section class="ipl-scroll-section">
+        <div class="ipl-scroll-header">
+            <div class="ipl-scroll-title-block">
+                <span class="ipl-scroll-tag">ANALYST INTEL DATABASE</span>
+                <h2 class="ipl-scroll-heading">IPL DEEP DIVE <span class="highlight-pink">// CLASSIFIED</span></h2>
+                <p class="ipl-scroll-subheading">Everything you need to know about the Indian Premier League — from history to stats to team legends.</p>
+            </div>
+        </div>
+
+        <!-- ROW 1: Image LEFT, Content RIGHT -->
+        <div class="ipl-row row-img-left">
+            <div class="ipl-img-col sticky-col">
+                <div class="player-sticker sticker-pink">
+                    <img src="/images/batsman.jpg" alt="IPL Batsman" class="player-img blurred-edges" />
+                    <div class="sticker-label">POWER HITTER</div>
+                </div>
+            </div>
+            <div class="ipl-content-col">
+                <div class="content-tag tag-yellow">ORIGIN STORY</div>
+                <h3 class="content-heading">What is the IPL?</h3>
+                <p class="content-para">The Indian Premier League (IPL) is the world's most-watched Twenty20 cricket franchise tournament, launched in 2008 by the Board of Control for Cricket in India (BCCI). It revolutionized cricket by merging sport, entertainment, and commerce into a single spectacle.</p>
+                <p class="content-para">Each season runs from March to May, featuring 10 city-based franchises competing in a round-robin format followed by playoffs. With billion-dollar broadcast rights and the world's best cricketers on the same pitch, the IPL is the second most-attended sporting league globally.</p>
+                <div class="stat-chips">
+                    <div class="stat-chip chip-green">10 Teams</div>
+                    <div class="stat-chip chip-pink">74 Matches/Season</div>
+                    <div class="stat-chip chip-blue">Est. 2008</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ROW 2: Content LEFT, Image RIGHT -->
+        <div class="ipl-row row-img-right">
+            <div class="ipl-content-col">
+                <div class="content-tag tag-green">GAME FORMAT</div>
+                <h3 class="content-heading">T20 — The Shortest Format</h3>
+                <p class="content-para">Each IPL match is a Twenty20 (T20) contest — 20 overs per side, 120 deliveries, and roughly 3 hours of edge-of-seat cricket. This fast-paced format rewards power hitting, innovative bowling strategies, and split-second fielding decisions.</p>
+                <p class="content-para">Teams can score between 120–230+ runs in a single innings. Batters aim to score at a strike rate above 150, while bowlers fight to contain the run flow using yorkers, slower balls, and bouncers. The last 5 overs — the "death overs" — often decide the game's outcome.</p>
+                <div class="stat-chips">
+                    <div class="stat-chip chip-yellow">20 Overs / Side</div>
+                    <div class="stat-chip chip-green">~3.5 hrs Duration</div>
+                    <div class="stat-chip chip-pink">Death Overs: Critical</div>
+                </div>
+            </div>
+            <div class="ipl-img-col sticky-col">
+                <div class="player-sticker sticker-green">
+                    <img src="/images/bowler.png" alt="IPL Bowler" class="player-img blurred-edges" />
+                    <div class="sticker-label">STRIKE BOWLER</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ROW 3: Image LEFT, Content RIGHT -->
+        <div class="ipl-row row-img-left">
+            <div class="ipl-img-col sticky-col">
+                <div class="player-sticker sticker-yellow">
+                    <img src="/images/allround.gif" alt="IPL All-Rounder" class="player-img blurred-edges" />
+                    <div class="sticker-label">ALL-ROUNDER</div>
+                </div>
+            </div>
+            <div class="ipl-content-col">
+                <div class="content-tag tag-blue">THE CHAMPIONS</div>
+                <h3 class="content-heading">IPL 2024 Champion: KKR</h3>
+                <p class="content-para">Kolkata Knight Riders (KKR) clinched their third IPL title in IPL 2024 with a dominant campaign. Led by Shreyas Iyer and powered by key performances from Venkatesh Iyer, Sunil Narine, and Mitchell Starc, KKR dismantled SunRisers Hyderabad in the final at Chennai.</p>
+                <p class="content-para">SRH made history with the highest total ever in an IPL final, but KKR's bowling unit stood firm. Narine won the Player of the Tournament award for his all-round brilliance — scoring 488 runs and taking 17 wickets across the tournament.</p>
+                <div class="stat-chips">
+                    <div class="stat-chip chip-purple">KKR — 2024 Champions</div>
+                    <div class="stat-chip chip-green">Narine: POTM</div>
+                    <div class="stat-chip chip-pink">3rd Title for KKR</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ROW 4: Content LEFT, Image RIGHT -->
+        <div class="ipl-row row-img-right">
+            <div class="ipl-content-col">
+                <div class="content-tag tag-pink">RECORDS & GLORY</div>
+                <h3 class="content-heading">All-Time Records</h3>
+                <p class="content-para">Virat Kohli holds the record for the most runs in IPL history, having scored over 7,600 runs with multiple Orange Cap victories. CSK's MS Dhoni is the most iconic captain with 5 IPL titles and the most wins as a captain in IPL history.</p>
+                <p class="content-para">Mumbai Indians (MI) remain the most successful franchise with 5 IPL titles. The highest individual score is 175* by Chris Gayle (RCB vs PWI, 2013), while Lasith Malinga holds the record for most wickets in IPL history with 170+ scalps.</p>
+                <div class="stat-chips">
+                    <div class="stat-chip chip-green">Kohli: 7600+ Runs</div>
+                    <div class="stat-chip chip-yellow">MI: 5 Titles</div>
+                    <div class="stat-chip chip-pink">Gayle: 175* Highest</div>
+                </div>
+            </div>
+            <div class="ipl-img-col sticky-col">
+                <div class="player-sticker sticker-sky">
+                    <img src="/images/test.jpg" alt="IPL Wicketkeeper" class="player-img blurred-edges" />
+                    <div class="sticker-label">KEEPER LEGEND</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- FOOTER -->
     <footer class="brutalist-footer">
         <p>© 2026 IPL AGENT CONSOLE // ALL SYSTEM LOGS CLASSIFIED // DATA COVERS 2024-2025 seasons</p>
     </footer>
-
-    <!-- QUIT OVERLAY -->
-    <div class="quit-overlay hidden" id="quit-overlay">
-        <div class="quit-modal">
-            <div class="quit-modal-header">⚠ SYSTEM SHUTDOWN</div>
-            <div class="quit-modal-body">
-                <p>You are about to terminate the IPL Agent Console session.</p>
-                <p>All unsaved query traces will be cleared from memory.</p>
-                <div class="quit-btn-group">
-                    <button class="brutalist-btn btn-pink" id="btn-confirm-quit">
-                        <i data-lucide="power"></i> CONFIRM QUIT
-                    </button>
-                    <button class="brutalist-btn btn-green" id="btn-cancel-quit">
-                        <i data-lucide="x"></i> CANCEL
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Lucide icons replacement runner -->
     <script>

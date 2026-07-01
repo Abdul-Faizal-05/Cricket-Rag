@@ -1,10 +1,21 @@
 
+const IPL_TEAMS = [
+    { id: "csk", name: "Chennai Super Kings", abbr: "CSK", colors: ["#FFD700", "#1B4E9B"] },
+    { id: "dc",  name: "Delhi Capitals",       abbr: "DC",  colors: ["#17489E", "#ED1B24"] },
+    { id: "gt",  name: "Gujarat Titans",        abbr: "GT",  colors: ["#1B2133", "#B4975A"] },
+    { id: "kkr", name: "Kolkata Knight Riders", abbr: "KKR", colors: ["#4A0080", "#D4AF37"] },
+    { id: "lsg", name: "Lucknow Super Giants",  abbr: "LSG", colors: ["#00B4D8", "#1B2133"] },
+    { id: "mi",  name: "Mumbai Indians",        abbr: "MI",  colors: ["#004C93", "#D4A843"] },
+    { id: "pbks",name: "Punjab Kings",          abbr: "PBKS",colors: ["#DD1F2D", "#FFD700"] },
+    { id: "rr",  name: "Rajasthan Royals",      abbr: "RR",  colors: ["#FF1493", "#004C93"] },
+    { id: "rcb", name: "Royal Challengers Bengaluru", abbr: "RCB", colors: ["#EC1C24", "#1A1A2E"] },
+    { id: "srh", name: "Sunrisers Hyderabad",   abbr: "SRH", colors: ["#FF6A00", "#1C1C1C"] },
+];
+
 document.addEventListener("DOMContentLoaded", () => {
     const queryInput = document.getElementById("query-input");
     const btnSubmit = document.getElementById("btn-submit");
     const btnExport = document.getElementById("btn-export");
-    const btnRefresh = document.getElementById("btn-refresh");
-    const btnQuit = document.getElementById("btn-quit");
     const connectionDot = document.getElementById("connection-dot");
     const protocolStatusText = document.getElementById("protocol-status-text");
     
@@ -20,44 +31,81 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const suggestionButtons = document.querySelectorAll(".suggestion-btn");
 
-    // Quit overlay elements
-    const quitOverlay = document.getElementById("quit-overlay");
-    const btnConfirmQuit = document.getElementById("btn-confirm-quit");
-    const btnCancelQuit = document.getElementById("btn-cancel-quit");
-
     let lastQueryResult = null; // Store last query response for exporting
 
     // Check connectivity to the FastAPI server on load
     checkBackendConnection();
 
-    // QUIT button — show overlay
-    btnQuit.addEventListener("click", () => {
-        quitOverlay.classList.remove("hidden");
+    // ============================
+    // THEME SELECTOR
+    // ============================
+    const btnTheme = document.getElementById("btn-theme");
+    const themeDropdown = document.getElementById("theme-dropdown");
+    const themeGrid = document.getElementById("theme-grid");
+
+    // Build team theme options
+    IPL_TEAMS.forEach(team => {
+        const option = document.createElement("div");
+        option.className = "theme-option";
+        option.dataset.theme = team.id;
+        option.innerHTML = `
+            <div class="theme-swatches">
+                <span class="theme-swatch" style="background:${team.colors[0]}"></span>
+                <span class="theme-swatch" style="background:${team.colors[1]}"></span>
+            </div>
+            ${team.abbr}
+        `;
+        option.title = team.name;
+        themeGrid.appendChild(option);
+    });
+
+    // Toggle dropdown
+    btnTheme.addEventListener("click", (e) => {
+        e.stopPropagation();
+        themeDropdown.classList.toggle("hidden");
         lucide.createIcons();
     });
 
-    // CANCEL quit
-    btnCancelQuit.addEventListener("click", () => {
-        quitOverlay.classList.add("hidden");
-    });
-
-    // CONFIRM quit — close the browser tab
-    btnConfirmQuit.addEventListener("click", () => {
-        window.close();
-        // Fallback: if browser blocks window.close(), show a message
-        setTimeout(() => {
-            quitOverlay.classList.add("hidden");
-            protocolStatusText.textContent = "Session terminated. You may close this tab manually.";
-            connectionDot.className = "status-dot red";
-        }, 300);
-    });
-
-    // Close overlay by clicking the backdrop
-    quitOverlay.addEventListener("click", (e) => {
-        if (e.target === quitOverlay) {
-            quitOverlay.classList.add("hidden");
+    // Close dropdown on outside click
+    document.addEventListener("click", (e) => {
+        if (!themeDropdown.classList.contains("hidden")) {
+            const wrapper = document.querySelector(".theme-selector-wrapper");
+            if (!wrapper.contains(e.target)) {
+                themeDropdown.classList.add("hidden");
+            }
         }
     });
+
+    // Apply theme
+    function applyTheme(themeId) {
+        if (themeId === "default") {
+            document.documentElement.removeAttribute("data-theme");
+        } else {
+            document.documentElement.setAttribute("data-theme", themeId);
+        }
+        localStorage.setItem("ipl-theme", themeId);
+        // Update active state
+        document.querySelectorAll(".theme-option").forEach(el => {
+            el.classList.toggle("active-theme", el.dataset.theme === themeId);
+        });
+        // Update button icon color
+        themeDropdown.classList.add("hidden");
+        lucide.createIcons();
+    }
+
+    // Theme option click
+    themeGrid.addEventListener("click", (e) => {
+        const option = e.target.closest(".theme-option");
+        if (option) {
+            applyTheme(option.dataset.theme);
+        }
+    });
+
+    // Restore saved theme
+    const savedTheme = localStorage.getItem("ipl-theme");
+    if (savedTheme) {
+        applyTheme(savedTheme);
+    }
 
     // Hook up suggestion buttons
     suggestionButtons.forEach(button => {
@@ -89,16 +137,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Force Refresh (resets the UI state)
-    btnRefresh.addEventListener("click", () => {
-        queryInput.value = "";
-        traceSection.classList.add("hidden");
-        answerSection.classList.add("hidden");
-        traceStepsContainer.innerHTML = "";
-        lastQueryResult = null;
-        protocolStatusText.textContent = "Console State Cleared. Ready for Querying.";
-    });
-
     // Export button (download JSON representation of last run)
     btnExport.addEventListener("click", () => {
         if (!lastQueryResult) {
@@ -106,11 +144,6 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
         exportQueryData();
-    });
-
-    // Mock reconnect button click
-    btnConnect.addEventListener("click", () => {
-        checkBackendConnection();
     });
 
     // Function to check connection to backend
@@ -132,13 +165,9 @@ document.addEventListener("DOMContentLoaded", () => {
     function setConnectionStatus(isConnected, errorMsg = "") {
         if (isConnected) {
             connectionDot.className = "status-dot green";
-            btnConnect.innerHTML = `<i data-lucide="wifi"></i> CONNECTED`;
-            btnConnect.className = "brutalist-btn btn-green";
             protocolStatusText.textContent = "Dynamic Edge Agent Routing Active";
         } else {
             connectionDot.className = "status-dot red pulse";
-            btnConnect.innerHTML = `<i data-lucide="wifi-off"></i> OFFLINE`;
-            btnConnect.className = "brutalist-btn btn-yellow";
             protocolStatusText.textContent = `Backend Offline: ${errorMsg || "Could not reach API"}`;
         }
         lucide.createIcons();
